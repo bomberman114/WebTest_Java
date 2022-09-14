@@ -11,14 +11,14 @@
 <script></script>
 </head>
 
-<!-- 
+<!--  
 유저아이디   유저이름    유저비밀번호  삭제상태
 asd           알파         1234          n 
 
 > 삭제
 ASD           알파         1234			 Y 
 
-로그인할때 #{accountStatus} = Y { return false } 
+
 
 
 select * from user
@@ -26,7 +26,7 @@ select * from user
 select * from user 
 where status = n ;
 
- -->
+--> 
 
 <body>
 	<h2>회원목록</h2>
@@ -37,7 +37,7 @@ where status = n ;
 			<th>PW</th>
 			<c:forEach items="${userList}" var="m">
 				<tr>
-					<td><a href="Test?humanName=${m.username}&userid=${m.userid}&pwd=${m.userpw}" style="color:blue">${m.username}</a></td>
+					<!--  --><td><a href="DetailUser?username=${m.username}&userid=${m.userid}&userpw=${m.userpw}" style="color:blue">${m.username}</a></td>
 					<td>${m.userid}</td>
 					<td>${m.userpw}</td>
 

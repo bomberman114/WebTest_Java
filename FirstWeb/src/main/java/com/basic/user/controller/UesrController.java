@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //어노테이션이 주입되었다.
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +18,7 @@ public class UesrController {
 
 	@Autowired // 임포트 하고 나머지 만들기 의존성을 주입한다.
 	private UserSerivice userService;
+	private Object detailUser;
 
 	@RequestMapping("/AccountForm") // ModelAndView 역할 MAV 컨트롤 스페이바 마브,
 	public ModelAndView userAccountForm() {
@@ -41,6 +40,7 @@ public class UesrController {
 
 	}
 
+	// UserList 조회
 	@RequestMapping("/UserList")
 	public ModelAndView userList() {
 		ModelAndView mv = new ModelAndView();
@@ -51,26 +51,31 @@ public class UesrController {
 		System.out.println("유저 컨트롤러 - 회원목록 조회 후 리스트에 입력");
 
 		// 가져온 리스트를 화면에 전달한다.
-		//.addAttribute("userList", userList);
+		// .addAttribute("userList", userList);
 		System.out.println("유저 컨트롤러 - 회원목록 리스트 화면 전달");
 		mv.addObject("userList", userList);
-		mv.setViewName("userlist/userList");
+		System.out.println("유저 컨트롤러 add함수 도착");
+		mv.setViewName("user/userList");
+		System.out.println("유저 컨트롤러 setView 함수 도착");
 		return mv;
 	}
-	
-	
+
 	@RequestMapping("/Test")
 	public ModelAndView test(@RequestParam HashMap<String, Object> map) {
 		System.out.println("Test에 왔습니다..");
-		System.out.println("test map =" + map  );
+		System.out.println("test map =" + map);
 		ModelAndView mv = new ModelAndView();
-		
-		
 		return null;
 	}
+
+	@RequestMapping("/DetailUser")
+	public ModelAndView detailUser(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
+		System.out.println("detail map = " + map);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("detailUser", map);
+		mv.setViewName("user/detailuser");
+		return mv;
+	}
+
 }
-
-//	@GetMapping("/UserList")
-//	public String list (Model model) {
-
-//		List<mdenuVo>menuList = SqlSession.selectList("")
