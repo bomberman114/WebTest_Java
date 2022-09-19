@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //어노테이션이 주입되었다.
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,7 +67,7 @@ public class UesrController {
 		System.out.println("Test에 왔습니다..");
 		System.out.println("test map =" + map);
 		ModelAndView mv = new ModelAndView();
-		return null;
+		return mv;
 	}
 
 	@RequestMapping("/DetailUser")
@@ -73,9 +75,39 @@ public class UesrController {
 		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
 		System.out.println("detail map = " + map);
 		ModelAndView mv = new ModelAndView();
+		List<UserVo> userList = userService.list();
 		mv.addObject("detailUser", map);
 		mv.setViewName("user/detailuser");
 		return mv;
 	}
 
+	@RequestMapping("DeleteUser")
+	public ModelAndView deleteUser(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저 컨트롤러 딜리트 함수 도착");
+		System.out.println("유저 컨트롤러삭제 함수map : " + map);
+		ModelAndView mv = new ModelAndView();
+		userService.delete(map);
+		mv.setViewName("redirect:/User/UserList");
+		return mv;
+	}
+
+	@RequestMapping("UserUpdateForm")
+	public ModelAndView userUpdateForm(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저업데이트 함수 도착");
+		ModelAndView mv = new ModelAndView();
+		System.out.println("유저업데이트함수 map : " + map);
+		mv.addObject("userUpdate", map);
+		mv.setViewName("user/userUpdate");
+		return mv;
+	}
+
+	@RequestMapping("UserUpdate")
+	public ModelAndView userUpdate(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저업데이트 입력 함수 도착");
+		ModelAndView mv = new ModelAndView();
+		System.out.println("유저업데이트함수 map : " + map);
+		userService.update(map);
+		mv.setViewName("redirect:/User/UserList");
+		return mv;
+	}
 }

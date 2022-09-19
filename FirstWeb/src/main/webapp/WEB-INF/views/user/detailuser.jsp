@@ -11,22 +11,23 @@
 <script></script>
 </head>
 <body>
-	<h2>회원목록</h2>
+	<h2>회원상세목록</h2>
 	<table border="1">
 		<tr>
 			<th>Name</th>
 			<th>ID</th>
 			<th>PW</th>
-		
-				<tr>
-					<!--  <td><a href="Detaile?humanName=${m.username}&userid=${m.userid}&pwd=${m.userpw}" style="color:blue">${m.username}</a></td> -->
-					<td>${detailUser.username}</td>
-					<td>${detailUser.userid}</td>
-					<td>${detailUser.userpw}</td>
+		<tr>
+			<!--  <td><a href="Detaile?humanName=${m.username}&userid=${m.userid}&pwd=${m.userpw}" style="color:blue">${m.username}</a></td> -->
+			<td>${detailUser.username}</td>
+			<td>${detailUser.userid}</td>
+			<td>${detailUser.userpw}</td>
 
-				</tr>
-		
+		</tr>
+
 	</table>
+	<a href="/User/UserUpdateForm?userid=${detailUser.userid}">수정</a>
+	<a href="/User/DeleteUser?userid=${detailUser.userid}">삭제</a>
 
 </body>
 </html>

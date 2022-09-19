@@ -26,7 +26,7 @@ select * from user
 select * from user 
 where status = n ;
 
---> 
+-->
 
 <body>
 	<h2>회원목록</h2>
@@ -37,13 +37,17 @@ where status = n ;
 			<th>PW</th>
 			<c:forEach items="${userList}" var="m">
 				<tr>
-					<!--  --><td><a href="DetailUser?username=${m.username}&userid=${m.userid}&userpw=${m.userpw}" style="color:blue">${m.username}</a></td>
+					<!--  -->
+					<td><a
+						href="DetailUser?username=${m.username}&userid=${m.userid}&userpw=${m.userpw}"
+						style="color: blue">${m.username}</a></td>
 					<td>${m.userid}</td>
 					<td>${m.userpw}</td>
 
 				</tr>
 			</c:forEach>
 	</table>
+	<a href="/">홈</a>
 
 </body>
 </html>

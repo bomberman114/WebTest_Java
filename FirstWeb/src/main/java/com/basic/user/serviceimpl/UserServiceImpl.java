@@ -18,17 +18,38 @@ public class UserServiceImpl implements UserSerivice {
 	// 회원가입
 	@Override
 	public void account(HashMap<String, Object> map) {
-    // System.out.println("UserServiceImpl acoount response map= " + map);
+		// System.out.println("UserServiceImpl acoount response map= " + map);
 		System.out.println("UserServiceImpl 바티스 전");
 		userDao.account(map);
 		System.out.println("UserServiceImpl 바티스 후");
 	}
+
 	@Override
-	public List<UserVo>  list(){
+	public List<UserVo> list() {
 		System.out.println("UserList Service 바티스전");
-		List<UserVo>  userlist = userDao.list();
+		List<UserVo> userlist = userDao.list();
 		System.out.println(userlist);
-		return  userlist;
+		return userlist;
+	}
+
+	// 회원삭제
+	@Override
+	public void delete(HashMap<String, Object> map) {
+		System.out.println("서비스임플 삭제전");
+		System.out.println("deletemap : " + map);
+		userDao.delete(map);
+		System.out.println("서비스임플 삭제후");
+
+	}
+
+	// 회원수정
+	@Override
+	public void update(HashMap<String, Object> map) {
+		System.out.println("유저업데이트 전");
+		System.out.println("update map : " + map);
+		userDao.update(map);
+		System.out.println("유저업데이트 후");
+
 	}
 
 }
