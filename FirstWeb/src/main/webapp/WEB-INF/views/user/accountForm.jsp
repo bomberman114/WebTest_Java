@@ -37,6 +37,7 @@
 		<br>
 		<span>PW:</span> <input type="password" maxlength="10" name="userpwd"> <!-- name이 키값이다. -->
 		<!--  <input type= "button" value="로그인"> -->
+		
 		<input type="submit" value="회원가입">
 	</form>
 	<a href="/">메인화면</a>

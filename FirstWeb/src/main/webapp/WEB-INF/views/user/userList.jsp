@@ -32,18 +32,25 @@ where status = n ;
 	<h2>회원목록</h2>
 	<table border="1">
 		<tr>
+			<th>유저번호</th>
 			<th>Name</th>
 			<th>ID</th>
-			<th>PW</th>
+
 			<c:forEach items="${userList}" var="m">
 				<tr>
 					<!--  -->
-					<td><a
-						href="DetailUser?username=${m.username}&userid=${m.userid}&userpw=${m.userpw}"
-						style="color: blue">${m.username}</a></td>
-					<td>${m.userid}</td>
-					<td>${m.userpw}</td>
+					<td>${m.useridx}</td>
+					<td>${m.username}</td>
 
+					<td>
+					<form action="/User/DetailUser" method="Post">
+					<input type = "hidden" value= "${m.userid}" name="userid" >
+					<input type = "submit" value ="상세페이지">
+					</form>
+					
+					<!--  <a href="DetailUser?userid=${m.userid}">${m.userid}</a></td>-->
+
+	
 				</tr>
 			</c:forEach>
 	</table>

@@ -30,7 +30,6 @@
 <body>
 	<h2>회원수정</h2>
 	<form action="/User/UserUpdate" id="form1" method="POST">
-	
 		<span>이름:</span> <input type="text" placeholder="이름을 입력 해주세요."  id="username" maxlength="10" name="username">
 		 <br> 
 		 <span>ID:</span> <input type="text" value="${userUpdate.userid}"  name="userid" readonly="readonly">

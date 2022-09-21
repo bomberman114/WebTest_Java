@@ -9,9 +9,9 @@
 
 
 		INSERT INTO
-		ACCOUNT_USER(USERID,USERPW,USERNAME)
-		VALUES (#{userid},#{userpwd},
-		#{username})
+		ACCOUNT_USER(USERID,USERPW,USERNAME,USERINDATE)
+		VALUES
+		(#{userid},#{userpwd},#{username},SYSDATE)
 
 
 	</insert>
@@ -19,13 +19,24 @@
 		SELECT * FROM ACCOUNT_USER
 	</select>
 
+	<select id="detailUser" resultType="HashMap">
+		SELECT USERIDX,
+		TO_CHAR(USERNAME) AS USERNAME, USERID,
+		TO_CHAR(USERPW) AS USERPW,
+		TO_CHAR(USERINDATE) AS USERINDATE,
+		TO_CHAR(USERUPDATE) AS USERUPDATE
+		FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
+	</select>
+
 	<delete id="deleteUser">
-		DELETE FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
+		DELETE FROM ACCOUNT_USER
+		WHERE USERID
+		LIKE #{userid}
 	</delete>
-	
+
 	<update id="updateUser">
-	UPDATE ACCOUNT_USER SET USERNAME = #{username},
-	USERPW = #{userpwd} WHERE USERID LIKE #{userid}
+		UPDATE ACCOUNT_USER SET USERNAME = #{username},
+		USERPW = #{userpwd}, USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
 	</update>
 
 

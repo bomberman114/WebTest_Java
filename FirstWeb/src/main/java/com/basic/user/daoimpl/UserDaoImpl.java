@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 	public void account(HashMap<String, Object> map) {
 		// System.out.println("UserDaoImpl acoount response map= " + map);
 		System.out.println("UserDaoImpl 바티스 전");
-
+		System.out.println("유저 다오 임플 map : " + map);
 		sqlSession.insert("User.accountUser", map);
 		System.out.println("UserDaoImpl 바티스 후");
 	}
@@ -35,6 +35,15 @@ public class UserDaoImpl implements UserDao {
 		// 마라.
 		// select * from aaa where username = #{username};
 		return userlist; // Daoimpl를 생략할때 리턴문에 sql세션을 바로 넣을 수있음
+	}
+
+	@Override
+	public HashMap<String, Object> detail(HashMap<String, Object> map) {
+		System.out.println("Dao 회원상세목록 조회 전");
+		System.out.println(map);
+		HashMap<String, Object> detailUser = sqlSession.selectOne("User.detailUser", map);
+		System.out.println(detailUser);
+		return detailUser;
 	}
 
 	@Override

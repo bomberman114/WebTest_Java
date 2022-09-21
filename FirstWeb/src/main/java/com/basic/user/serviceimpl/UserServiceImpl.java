@@ -20,16 +20,28 @@ public class UserServiceImpl implements UserSerivice {
 	public void account(HashMap<String, Object> map) {
 		// System.out.println("UserServiceImpl acoount response map= " + map);
 		System.out.println("UserServiceImpl 바티스 전");
+		System.out.println("유저 서비스 임플 map : " + map);
 		userDao.account(map);
 		System.out.println("UserServiceImpl 바티스 후");
 	}
 
+	// 회원목록
 	@Override
 	public List<UserVo> list() {
 		System.out.println("UserList Service 바티스전");
 		List<UserVo> userlist = userDao.list();
 		System.out.println(userlist);
 		return userlist;
+	}
+
+	// 회원상세
+	@Override
+	public HashMap<String, Object> detail(HashMap<String, Object> map) {
+		System.out.println("유저서비스상세 임플 바티스전");
+		System.out.println(map);
+		HashMap<String, Object> detailUser = userDao.detail(map);
+		System.out.println("유저서비스상세 임플 바티스후");
+		return detailUser;
 	}
 
 	// 회원삭제

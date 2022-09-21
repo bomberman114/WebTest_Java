@@ -13,6 +13,9 @@ public interface UserDao {
 	// 회원목록
 	List<UserVo> list();
 
+	// 회원상세
+	HashMap<String, Object> detail(HashMap<String, Object> map);
+
 	// 회원삭제
 	void delete(HashMap<String, Object> map);
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller; //어노테이션이 주입되
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.basic.user.service.UserSerivice;
@@ -20,7 +21,6 @@ public class UesrController {
 
 	@Autowired // 임포트 하고 나머지 만들기 의존성을 주입한다.
 	private UserSerivice userService;
-	private Object detailUser;
 
 	@RequestMapping("/AccountForm") // ModelAndView 역할 MAV 컨트롤 스페이바 마브,
 	public ModelAndView userAccountForm() {
@@ -37,7 +37,7 @@ public class UesrController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("유저 컨트롤러 회원가입  입력 페이지 함수 도착");
 		userService.account(map);
-		mv.setViewName("home");
+		mv.setViewName("redirect:/User/UserList");
 		return mv;
 
 	}
@@ -62,6 +62,18 @@ public class UesrController {
 		return mv;
 	}
 
+	// 회원 상세목록
+	@RequestMapping("/DetailUser")
+	public ModelAndView detailUser(@RequestParam HashMap<String, Object> map) {
+		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
+		System.out.println("detail map = " + map);
+		ModelAndView mv = new ModelAndView();
+		HashMap<String, Object> detailUser = userService.detail(map);
+		mv.addObject("detailUser", detailUser);
+		mv.setViewName("user/detailuser");
+		return mv;
+	}
+
 	@RequestMapping("/Test")
 	public ModelAndView test(@RequestParam HashMap<String, Object> map) {
 		System.out.println("Test에 왔습니다..");
@@ -70,17 +82,7 @@ public class UesrController {
 		return mv;
 	}
 
-	@RequestMapping("/DetailUser")
-	public ModelAndView detailUser(@RequestParam HashMap<String, Object> map) {
-		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
-		System.out.println("detail map = " + map);
-		ModelAndView mv = new ModelAndView();
-		List<UserVo> userList = userService.list();
-		mv.addObject("detailUser", map);
-		mv.setViewName("user/detailuser");
-		return mv;
-	}
-
+	// 회원 삭제
 	@RequestMapping("DeleteUser")
 	public ModelAndView deleteUser(@RequestParam HashMap<String, Object> map) {
 		System.out.println("유저 컨트롤러 딜리트 함수 도착");
