@@ -64,4 +64,14 @@ public class UserServiceImpl implements UserSerivice {
 
 	}
 
+	// 로그인 체크
+	@Override
+	public HashMap<String, Object> loginCheck(HashMap<String, Object> map) {
+		System.out.println("유저서비스상세 임플 로그인체크 바티스전");
+		System.out.println(map);
+		HashMap<String, Object> userinfo = userDao.loginCheck(map);
+		System.out.println("유저서비스상세 임플 로그인 체크 바티스후");
+		return userinfo;
+	}
+
 }

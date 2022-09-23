@@ -3,14 +3,16 @@ package com.basic.user.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //어노테이션이 주입되었다.
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.basic.user.service.UserSerivice;
 import com.basic.user.vo.UserVo;
 
@@ -112,4 +114,52 @@ public class UesrController {
 		mv.setViewName("redirect:/User/UserList");
 		return mv;
 	}
+
+	@RequestMapping("Login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("로그인 페이지 함수 도착");
+		mv.setViewName("user/login");
+		return mv;
+
+	}
+
+	@RequestMapping("LoginCheck")
+	public ModelAndView loginCkeck(@RequestParam HashMap<String, Object> map, HttpServletRequest req,
+			RedirectAttributes rttr) {
+
+		System.out.println("컨트롤러 로그인입력함수 도착");
+		System.out.println("로그인 map : " + map);
+		ModelAndView mv = new ModelAndView();
+		// 세션 생성
+		HttpSession session = req.getSession();
+		HashMap<String, Object> userinfo = userService.loginCheck(map);
+		System.out.println("유저 컨트롤러 - 조회후  map에 입력");
+		System.out.println(userinfo);
+
+		if (userinfo == null) {
+			session.setAttribute("user", null);
+			rttr.addFlashAttribute("msg", false);
+			System.out.println("유저 컨트롤러 - 로그인 실패");
+			mv.setViewName("redirect:/User/Login");
+		} else {
+			session.setAttribute("user", userinfo);
+			System.out.println("유저 컨트롤러 - 로그인 성공");
+			mv.setViewName("redirect:/");
+		}
+
+		return mv;
+	}
+
+	@RequestMapping("/Logout")
+	public ModelAndView logout(HttpSession session) {
+		System.out.println("유저 컨트롤러 - 로그아웃 함수 도착");
+		ModelAndView mv = new ModelAndView();
+
+		// 세션 종료
+		session.invalidate();
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+
 }

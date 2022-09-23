@@ -9,12 +9,14 @@ public class UserVo {
 	private String username;
 	private String userindate;
 	private String userupdate;
+	private String userlogin;
 
 //Constructor
 	public UserVo() {
 	}
 
-	public UserVo(String useridx, String userid, String userpw, String username, String userindate, String userupdate) {
+	public UserVo(String useridx, String userid, String userpw, String username, String userindate, String userupdate,
+			String userlogin) {
 		super();
 		this.useridx = useridx;
 		this.userid = userid;
@@ -22,6 +24,7 @@ public class UserVo {
 		this.username = username;
 		this.userindate = userindate;
 		this.userupdate = userupdate;
+		this.userlogin = userlogin;
 	}
 
 // Getter Setter
@@ -73,11 +76,20 @@ public class UserVo {
 		this.username = username;
 	}
 
+	public String getUserlogin() {
+		return userlogin;
+	}
+
+	public void setUserlogin(String userlogin) {
+		this.userlogin = userlogin;
+	}
+
 //toString
 	@Override
 	public String toString() {
 		return "UserVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userindate="
-				+ userindate + ", userupdate=" + userupdate + ", useridx=" + useridx + "]";
+				+ userindate + ", userupdate=" + userupdate + ", useridx=" + useridx + ", userlogin =" + userlogin
+				+ "]";
 	}
 
 }

@@ -21,4 +21,7 @@ public interface UserDao {
 
 	// 회원수정
 	void update(HashMap<String, Object> map);
+
+	// 로그인 체크
+	HashMap<String, Object> loginCheck(HashMap<String, Object> map);
 }

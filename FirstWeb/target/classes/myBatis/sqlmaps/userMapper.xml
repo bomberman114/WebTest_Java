@@ -39,5 +39,11 @@
 		USERPW = #{userpwd}, USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
 	</update>
 
+	<select id="loginCheck" resultType="HashMap">
+		SELECT USERID,TO_CHAR(USERNAME) AS USERNAME FROM ACCOUNT_USER
+		WHERE USERID LIKE #{userid} AND USERPW LIKE #{userpw};
+
+	</select>
+	
 
 </mapper>
