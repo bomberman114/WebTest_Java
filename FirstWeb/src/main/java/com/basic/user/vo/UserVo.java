@@ -9,14 +9,14 @@ public class UserVo {
 	private String username;
 	private String userindate;
 	private String userupdate;
-	private String userlogin;
+	private String adminToken;
 
 //Constructor
 	public UserVo() {
 	}
 
 	public UserVo(String useridx, String userid, String userpw, String username, String userindate, String userupdate,
-			String userlogin) {
+			String adminToken) {
 		super();
 		this.useridx = useridx;
 		this.userid = userid;
@@ -24,8 +24,10 @@ public class UserVo {
 		this.username = username;
 		this.userindate = userindate;
 		this.userupdate = userupdate;
-		this.userlogin = userlogin;
+		this.adminToken = adminToken;
 	}
+
+
 
 // Getter Setter
 	public String getUserid() {
@@ -75,21 +77,19 @@ public class UserVo {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getUserlogin() {
-		return userlogin;
+	public String getAdminToken() {
+		return adminToken;
 	}
-
-	public void setUserlogin(String userlogin) {
-		this.userlogin = userlogin;
+	
+	public void setAdminToken(String adminToken) {
+		this.adminToken = adminToken;
 	}
 
 //toString
 	@Override
 	public String toString() {
 		return "UserVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userindate="
-				+ userindate + ", userupdate=" + userupdate + ", useridx=" + useridx + ", userlogin =" + userlogin
-				+ "]";
+				+ userindate + ", userupdate=" + userupdate + ", useridx=" + useridx + "]";
 	}
 
 }

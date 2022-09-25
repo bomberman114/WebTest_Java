@@ -90,6 +90,8 @@ public class UesrController {
 		System.out.println("유저 컨트롤러 딜리트 함수 도착");
 		System.out.println("유저 컨트롤러삭제 함수map : " + map);
 		ModelAndView mv = new ModelAndView();
+		
+		
 		userService.delete(map);
 		mv.setViewName("redirect:/User/UserList");
 		return mv;
@@ -112,53 +114,6 @@ public class UesrController {
 		System.out.println("유저업데이트함수 map : " + map);
 		userService.update(map);
 		mv.setViewName("redirect:/User/UserList");
-		return mv;
-	}
-
-	@RequestMapping("Login")
-	public ModelAndView login() {
-		ModelAndView mv = new ModelAndView();
-		System.out.println("로그인 페이지 함수 도착");
-		mv.setViewName("user/login");
-		return mv;
-
-	}
-
-	@RequestMapping("LoginCheck")
-	public ModelAndView loginCkeck(@RequestParam HashMap<String, Object> map, HttpServletRequest req,
-			RedirectAttributes rttr) {
-
-		System.out.println("컨트롤러 로그인입력함수 도착");
-		System.out.println("로그인 map : " + map);
-		ModelAndView mv = new ModelAndView();
-		// 세션 생성
-		HttpSession session = req.getSession();
-		HashMap<String, Object> userinfo = userService.loginCheck(map);
-		System.out.println("유저 컨트롤러 - 조회후  map에 입력");
-		System.out.println(userinfo);
-
-		if (userinfo == null) {
-			session.setAttribute("user", null);
-			rttr.addFlashAttribute("msg", false);
-			System.out.println("유저 컨트롤러 - 로그인 실패");
-			mv.setViewName("redirect:/User/Login");
-		} else {
-			session.setAttribute("user", userinfo);
-			System.out.println("유저 컨트롤러 - 로그인 성공");
-			mv.setViewName("redirect:/");
-		}
-
-		return mv;
-	}
-
-	@RequestMapping("/Logout")
-	public ModelAndView logout(HttpSession session) {
-		System.out.println("유저 컨트롤러 - 로그아웃 함수 도착");
-		ModelAndView mv = new ModelAndView();
-
-		// 세션 종료
-		session.invalidate();
-		mv.setViewName("redirect:/");
 		return mv;
 	}
 
