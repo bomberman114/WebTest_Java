@@ -25,20 +25,25 @@
 			<th>가입날짜</th>
 			<th>수정날짜</th>
 		<tr>
-			<!--  <td><a href="Detaile?humanName=${m.username}&userid=${m.userid}&pwd=${m.userpw}" style="color:blue">${m.username}</a></td> -->
-			<td>${detailUser.USERIDX}</td>
-			<td>${detailUser.USERNAME}</td>
-			<td>${detailUser.USERID}</td>
-			<td>${detailUser.USERPW}</td>
-			<td>${detailUser.USERINDATE}</td>
-			<td>${detailUser.USERUPDATE}</td>
+			
+			<td>${detail.useridx}</td>
+			<td>${detail.username}</td>
+			<td>${detail.userid}</td>
+			<td>${detail.userpw}</td>
+			<td>${detail.userindate}</td>
+			<td>${detail.userupdate}</td>
 
 		</tr>
 
 	</table>
+	<form action="/User/UpdateForm" id="form1" method="POST">
+	<input type="hidden" value="${detail.userid}" name="userid">
+	<input type="hidden" value="${detail.userpw}" name="userpw">
+	<input type="submit" value="회원수정">
 	</form>
-	<a href="/User/UserUpdateForm?userid=${detailUser.USERID}">수정</a>
-	<a href="/User/DeleteUser?userid=${detailUser.USERID}">삭제</a>
+	
+	<a href="/User/Delete?userid=${detail.userid}">삭제</a>
+	<a href="/User/UpdateForm?userid=${detail.userid}">수정</a>
 
 </body>
 </html>

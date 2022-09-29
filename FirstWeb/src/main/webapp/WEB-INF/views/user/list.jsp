@@ -34,16 +34,16 @@ where status = n ;
 		<tr>
 			<th>유저번호</th>
 			<th>Name</th>
-			<th>ID</th>
+			<th>상세페이지</th>
 
-			<c:forEach items="${userList}" var="m">
+			<c:forEach items="${List}" var="m">
 				<tr>
 					<!--  -->
 					<td>${m.useridx}</td>
 					<td>${m.username}</td>
 
 					<td>
-					<form action="/User/DetailUser" method="Post">
+					<form action="/User/Detail" method="Post">
 					<input type = "hidden" value= "${m.userid}" name="userid" >
 					<input type = "submit" value ="상세페이지">
 					</form>

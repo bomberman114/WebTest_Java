@@ -1,5 +1,8 @@
+<%@page import="javax.naming.spi.DirStateFactory.Result"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.basic.user.controller.UserController" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +46,10 @@
 </head>
 <body>
 	<h2>회원가입</h2>
+	<% String result1 =(String) request.getAttribute("result1"); %>
+	<% if (result1.equals("false")){%>
+	<div style="color: red;">${msg}</div>
+	<%} %>
 	<form action="/User/Account" id="form1" method="POST">
 		<span>이름:</span> <input type="text" placeholder="이름을 입력 해주세요."  id="username" maxlength="10" name="username">
 		 <br> 

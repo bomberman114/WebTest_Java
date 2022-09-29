@@ -14,14 +14,19 @@ public interface UserDao {
 	List<UserVo> list();
 
 	// 회원상세
-	HashMap<String, Object> detail(HashMap<String, Object> map);
+	UserVo detail(String userid);
 
 	// 회원삭제
-	void delete(HashMap<String, Object> map);
+	void delete(String userid);
 
 	// 회원수정
-	void update(HashMap<String, Object> map);
+	void update(String username, String userpw);
 
-	// 로그인 체크
-	HashMap<String, Object> loginCheck(HashMap<String, Object> map);
+    // 회원수정값 있는지 확인
+	boolean updateForm(String userid, String userpw);
+
+	// 회원가입 아이디 중복확인
+	boolean accountForm(HashMap<String, Object> map);
+
+
 }

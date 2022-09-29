@@ -58,7 +58,7 @@ public class UserVo {
 		return username;
 	}
 
-	public Object getUserindate() {
+	public String getUserindate() {
 		return userindate;
 	}
 
@@ -66,7 +66,7 @@ public class UserVo {
 		this.userindate = userindate;
 	}
 
-	public Object getUserupdate() {
+	public String getUserupdate() {
 		return userupdate;
 	}
 
@@ -85,11 +85,10 @@ public class UserVo {
 		this.adminToken = adminToken;
 	}
 
-//toString
-	@Override
+@Override
 	public String toString() {
-		return "UserVo [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userindate="
-				+ userindate + ", userupdate=" + userupdate + ", useridx=" + useridx + "]";
+		return "UserVo [useridx=" + useridx + ", userid=" + userid + ", userpw=" + userpw + ", username=" + username
+				+ ", userindate=" + userindate + ", userupdate=" + userupdate + ", adminToken=" + adminToken + "]";
 	}
 
 }

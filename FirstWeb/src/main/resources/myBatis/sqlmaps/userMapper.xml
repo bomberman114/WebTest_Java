@@ -15,35 +15,45 @@
 
 
 	</insert>
-	<select id="userList" resultType="com.basic.user.vo.UserVo">
+	<select id="List" resultType="com.basic.user.vo.UserVo">
 		SELECT * FROM ACCOUNT_USER
 	</select>
 
-	<select id="detailUser" resultType="HashMap">
+	<select id="detail" resultType="com.basic.user.vo.UserVo">
 		SELECT USERIDX,
-		TO_CHAR(USERNAME) AS USERNAME, USERID,
+		TO_CHAR(USERNAME)
+		AS USERNAME, USERID,
 		TO_CHAR(USERPW) AS USERPW,
-		TO_CHAR(USERINDATE) AS USERINDATE,
+		TO_CHAR(USERINDATE) AS
+		USERINDATE,
 		TO_CHAR(USERUPDATE) AS USERUPDATE
-		FROM ACCOUNT_USER WHERE USERID LIKE #{userid}
+		FROM ACCOUNT_USER WHERE
+		USERID LIKE #{userid}
 	</select>
 
-	<delete id="deleteUser">
+	<delete id="delete">
 		DELETE FROM ACCOUNT_USER
 		WHERE USERID
 		LIKE #{userid}
 	</delete>
 
-	<update id="updateUser">
+	<update id="update">  <!-- resultType="com.basic.user.vo.UserVo" -->
 		UPDATE ACCOUNT_USER SET USERNAME = #{username},
-		USERPW = #{userpwd}, USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
+		USERPW = #{userpwd},
+		USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
 	</update>
 
-	<select id="loginCheck" resultType="HashMap">
-		SELECT USERID,TO_CHAR(USERNAME) AS USERNAME FROM ACCOUNT_USER
-		WHERE USERID LIKE #{userid} AND USERPW LIKE #{userpw};
+	<select id="check" resultType="int">
+		SELECT COUNT(*) FROM account_user WHERE USERID LIKE #{userid} AND
+		USERPW LIKE #{userpw}
 
 	</select>
 	
+	<select id="checkAccount" resultType="int">
+		SELECT COUNT(*) FROM account_user WHERE USERID LIKE #{userid} 
+
+	</select>
+
+
 
 </mapper>
