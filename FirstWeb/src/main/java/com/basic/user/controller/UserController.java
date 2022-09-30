@@ -25,7 +25,7 @@ public class UserController {
 	public ModelAndView userAccountForm() {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("유저회원가입 함수 도착");
-	
+
 		mv.setViewName("user/accountForm");
 		return mv;
 	}
@@ -37,21 +37,23 @@ public class UserController {
 		System.out.println("유저아이디:" + map.get("userid"));
 		System.out.println(result);
 		String msg = "";
-		if (result) {
+		if (result == true) {
 			System.out.println("트루까지 왔다.");
 			System.out.println(map);
 			userService.account(map);
-			mv.setViewName("redirect:/User/List");
+			mv.setViewName("redirect:/Login/LoginForm");
 			return mv;
-		} else if (result = false) {
+		} else if (result == false) {
+			System.out.println("펠까지 왔다");
 			msg = "중복된 ID입니다. 다른 ID를 입력해주세요";
+			System.out.println(msg);
 			String result1 = "false";
 			mv.addObject("result1", result1);
 			mv.addObject("msg", msg);
-			mv.setViewName("redirect:/User/AccountForm");
-			return mv;	
+			mv.setViewName("user/accountForm");
+			return mv;
 		}
-		
+		mv.setViewName("redirect:/");
 		return mv;
 
 	}

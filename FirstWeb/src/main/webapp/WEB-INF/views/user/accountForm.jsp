@@ -46,10 +46,10 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<% String result1 =(String) request.getAttribute("result1"); %>
+ <% String result1 =(String) request.getAttribute("result1"); %>
 	<% if (result1.equals("false")){%>
 	<div style="color: red;">${msg}</div>
-	<%} %>
+	<%} %>  
 	<form action="/User/Account" id="form1" method="POST">
 		<span>이름:</span> <input type="text" placeholder="이름을 입력 해주세요."  id="username" maxlength="10" name="username">
 		 <br> 
