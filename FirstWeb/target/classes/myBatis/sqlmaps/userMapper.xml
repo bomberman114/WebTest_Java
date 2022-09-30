@@ -37,11 +37,9 @@
 		LIKE #{userid}
 	</delete>
 
-	<update id="update">  <!-- resultType="com.basic.user.vo.UserVo" -->
-		UPDATE ACCOUNT_USER SET USERNAME = #{username},
-		USERPW = #{userpwd},
-		USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
-	</update>
+	<update id="update">
+      UPDATE ACCOUNT_USER SET USERNAME = #{username}, USERPW = #{userpw}, USERUPDATE = SYSDATE WHERE USERID LIKE #{userid}
+   </update>
 
 	<select id="check" resultType="int">
 		SELECT COUNT(*) FROM account_user WHERE USERID LIKE #{userid} AND

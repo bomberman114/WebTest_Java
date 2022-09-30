@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserSerivice {
 
 	// 회원가입 아이디 중복확인
 	@Override
-	public boolean accountForm(HashMap<String, Object> map) {
-		boolean accountForm = userDao.accountForm(map);
-		return accountForm;
+	public boolean idcheck(String userid) {
+		boolean idcheck = userDao.idcheck(userid);
+		return idcheck;
 	}
 
 	// 회원목록
@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserSerivice {
 
 	// 회원수정
 	@Override
-	public void update(String username, String userpw) {
-		userDao.update(username, userpw);
+	public void update(String userid, String username, String userpw) {
+		userDao.update(userid, username, userpw);
 
 	}
 

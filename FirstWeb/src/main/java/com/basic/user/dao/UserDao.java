@@ -20,13 +20,12 @@ public interface UserDao {
 	void delete(String userid);
 
 	// 회원수정
-	void update(String username, String userpw);
+	void update(String userid, String username, String userpw);
 
-    // 회원수정값 있는지 확인
+	// 회원수정값 있는지 확인
 	boolean updateForm(String userid, String userpw);
 
 	// 회원가입 아이디 중복확인
-	boolean accountForm(HashMap<String, Object> map);
-
+	boolean idcheck(String userid);
 
 }

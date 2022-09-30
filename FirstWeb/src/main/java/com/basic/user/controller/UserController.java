@@ -33,8 +33,9 @@ public class UserController {
 	@RequestMapping("/Account") // ModelAndView 역할 MAV 컨트롤 스페이바 마브, @RequestParam이 해시맵형식으로 받는것
 	public ModelAndView userAccount(@RequestParam HashMap<String, Object> map) {
 		ModelAndView mv = new ModelAndView();
-		boolean result = userService.accountForm(map);
-		System.out.println("유저아이디:" + map.get("userid"));
+		String userid = (String) map.get("userid");
+		boolean result = userService.idcheck(userid);
+		System.out.println("유저아이디:" + userid);
 		System.out.println(result);
 		String msg = "";
 		if (result == true) {
@@ -73,14 +74,48 @@ public class UserController {
 		return mv;
 	}
 
-	// 회원 상세목록
 	@RequestMapping("/Detail")
-	public ModelAndView detail(String userid) {
-		System.out.println("유저 컨트롤러 - 회원 상세정보 함수 도착");
+	public ModelAndView detailUser(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 함수 도착");
+		System.out.println("detail userid = " + userid);
 		ModelAndView mv = new ModelAndView();
+
+		// DB에서 정보를 가져온다.
 		UserVo detail = userService.detail(userid);
+		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 조회 후 UserVo에 입력");
+		System.out.println(detail);
+
+		// 일반 유저임을 나타내기 위한 토큰 발급
+		detail.setAdminToken("0");
+		System.out.println("로그인한 계정은 일반 유저입니다.");
+
+		// 가져온 정보를 화면에 전달한다.
 		mv.addObject("detail", detail);
 		mv.setViewName("user/detail");
+		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 화면 전달");
+		return mv;
+	}
+
+	// 관리자 - 회원 상세정보
+	@RequestMapping("/DetailAdmin")
+	public ModelAndView detailAdmin(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 관리자 기준 상세정보 함수 도착");
+		System.out.println("detail userid = " + userid);
+		ModelAndView mv = new ModelAndView();
+
+		// DB에서 정보를 가져온다.
+		UserVo detail = userService.detail(userid);
+		System.out.println("유저 컨트롤러 - 관리자 기준 상세정보 조회 후 UserVo에 입력");
+		System.out.println(detail);
+
+		// 관리자임을 나타내기 위한 토큰 발급
+		detail.setAdminToken("1");
+		System.out.println("로그인한 계정은 관리자입니다.");
+
+		// 가져온 정보를 화면에 전달한다.
+		mv.addObject("detail", detail);
+		mv.setViewName("user/detail");
+		System.out.println("유저 컨트롤러 - 관리자 기준 상세정보 화면 전달");
 		return mv;
 	}
 
@@ -93,36 +128,49 @@ public class UserController {
 	}
 
 	// 회원 삭제
-	@RequestMapping("Delete")
-	public ModelAndView delete(String userid) {
-		System.out.println("유저 컨트롤러 딜리트 함수 도착");
+	@RequestMapping("/Delete")
+	public ModelAndView deleteUser(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 일반 유저기준 탈퇴 함수 도착");
+		System.out.println("탈퇴 id = " + userid);
+		ModelAndView mv = new ModelAndView();
+		userService.delete(userid);
+		mv.setViewName("redirect:/Login/LoginForm");
+		return mv;
+	}
+
+	// 관리자 회원삭제
+	@RequestMapping("/DeleteAdmin")
+	public ModelAndView deleteAdmin(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 관리자 기준 추방 함수 도착");
+		System.out.println("추방 id = " + userid);
 		ModelAndView mv = new ModelAndView();
 		userService.delete(userid);
 		mv.setViewName("redirect:/User/List");
 		return mv;
 	}
 
-	@RequestMapping("UpdateForm")
-	public ModelAndView updateForm(String userid, String userpw) {
-		System.out.println("유저업데이트 함수 도착");
+	@RequestMapping("/UpdateForm")
+	public ModelAndView updateUserForm(@RequestParam String userid) {
+		System.out.println("유저 컨트롤러 - 회원정보 수정 함수 도착");
+		System.out.println("update userid = " + userid);
 		ModelAndView mv = new ModelAndView();
-		System.out.println("유저아이디:" + userid + "유저비번 : " + userpw);
-		boolean result = userService.updateForm(userid, userpw);
-		System.out.println(result);
-		if (result) {
-			mv.setViewName("user/updateForm");
-			return mv;
-		} else {
-			mv.setViewName("redirect:/User/List");
-			return mv;
-		}
+
+		// DB에서 정보를 가져온다.
+		UserVo updateUser = userService.detail(userid);
+		System.out.println("유저 컨트롤러 - 회원 상세정보 조회 후 UserVo에 입력");
+		System.out.println(updateUser);
+
+		// 가져온 정보를 화면에 전달한다.
+		mv.addObject("update", updateUser);
+		mv.setViewName("user/updateForm");
+		return mv;
 	}
 
 	@RequestMapping("Update")
-	public ModelAndView update(String username, String userpw) {
+	public ModelAndView update(@RequestParam String userid, String username, String userpw) {
 		System.out.println("유저업데이트 입력 함수 도착");
 		ModelAndView mv = new ModelAndView();
-		userService.update(username, userpw);
+		userService.update(userid ,username, userpw);
 		mv.setViewName("redirect:/User/List");
 		return mv;
 	}

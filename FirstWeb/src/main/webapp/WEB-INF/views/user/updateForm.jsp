@@ -1,7 +1,8 @@
 <%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@page import="com.nhncorp.lucy.security.xss.listener.ContentsRemoveListener"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.basic.user.controller.UserController" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,35 +14,67 @@
 </head>
 <body>
 	<script>
-		$(document).submit(function(e) {
-			var usernameEl = document.getElementById('username');
-			var username = usernameEl.value
-
-			if (username == null || username == '') {
-
-				alert('이름을 입력해주세요.');
-				usernameEl.focus();
-				return false;
-
-			} else {
-				alert('회원수정 되었습니다.');
-			}
-		})
+	  $(document).submit(function(e){
+	         var usernameEl = document.getElementById('username');
+	         var username = usernameEl.value
+	         var userpwEl = document.getElementById('userpw');
+	         var userpw = userpwEl.value
+	         var pwConfirmEl = document.getElementById('pwConfirm');
+	 	     var pwConfirm = pwConfirmEl.value
+	         
+	         
+	         if (confirm('수정하시겠습니까?')) {
+	        	 
+		         if ( username == null || username == '' ){
+			         alert('이름을 입력해주세요.');
+			         usernameEl.focus();
+			         return false;
+		         }
+		         if ( userpw == null || userpw == '' ){
+			         alert('비밀번호를 입력해주세요.');
+			         userpwEl.focus();
+			         return false;
+			         
+		         } 
+		         if ( pwConfirm == null || pwConfirm == '' ){
+		 	        alert('비밀번호 확인을 입력해주세요.');
+		 	        pwConfirmEl.focus();
+		 	        return false;
+		 	        
+		 	     }
+		 	     if ( pwConfirm != userpw ) {
+		 	    	alert('비밀번호가 일치하지 않습니다!');
+		 	        pwConfirmEl.focus();
+		 	    	return false;
+		 	    	
+		 	     } else {
+		            alert('회원정보가 수정되었습니다.');
+		         }
+		         
+	         } else {
+	        	 return false;
+	         }
+	      })
+	   
 	</script>
 </head>
 <body>
-	<h2>회원수정</h2>
-	<form action="/User/Update" id="form1" method="POST">
-		<span>이름:</span> <input type="text" placeholder="이름을 입력 해주세요."  id="username" maxlength="10" name="username">
-		 <br> 
-		 <span>ID:</span> <input type="text" value="${update.userid}"  name="userid" readonly="readonly">
+	<h2>회원정보 수정</h2>
+	<h5 style="color:red;">ID는 수정이 불가합니다!</h5>
+	<form action="/User/Update" method="POST">
+		<span style="margin-right:47px;">ID</span> <input value="${update.userid}" name="userid" readonly="readonly">
 		<br>
-		<span>PW 화인:</span> <input type="password" name="pwCheck" maxlength="10" >
+		<span style="margin-right:31px;">이름</span> <input value="${update.username}" placeholder="새로운 이름 입력" maxlength="20" name="username" id="username">
 		<br>
-		<span>수정할 PW:</span> <input type="password" maxlength="10" name="userpwd"> <!-- name이 키값이다. -->
-		<!--  <input type= "button" value="로그인"> -->
-		<input type="submit" value="회원수정">
+		<span style="margin-right:38px;">PW</span> <input type="password" placeholder="새 비밀번호 입력" maxlength="20" name="userpw" id="userpw">
+		<br>
+		<span>PW 확인</span> <input type="password" placeholder="새 비밀번호 확인" maxlength="20" id="pwConfirm">
+		<br>
+		<br>
+		<!-- name이 키 값이다. name 속성 없으면 값이 안넘어감 -->
+		<input type="submit" value="수정">
 	</form>
+	<br>
 	<a href="/">메인화면</a>
 </body>
 </html>

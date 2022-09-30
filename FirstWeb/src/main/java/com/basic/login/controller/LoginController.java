@@ -67,4 +67,12 @@ public class LoginController {
 
 	}
 
+	@RequestMapping("/Logout")
+	public ModelAndView logout() {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("로그인 컨트롤러 - 로그아웃 함수 도착");
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+
 }

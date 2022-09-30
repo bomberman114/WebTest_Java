@@ -24,12 +24,13 @@ public class UserDaoImpl implements UserDao {
 
 	// 회원가입 아이디 중복확인
 	@Override
-	public boolean accountForm(HashMap<String, Object> map) {
-		System.out.println(map.get("userid"));
+	public boolean idcheck(String userid) {
+		System.out.println(userid);
 		boolean result = false;
 
-		int count = sqlSession.selectOne("User.checkAccount", map.get("userid"));
+		int count = sqlSession.selectOne("User.checkAccount", userid);
 		if (count == 1) {
+			// 있는개 확인이 되면 중복이기 때문에 일부러 false값을 준것이다.
 			result = false;
 		} else {
 			result = true;
@@ -61,11 +62,13 @@ public class UserDaoImpl implements UserDao {
 
 	// 회원수정
 	@Override
-	public void update(String username, String userpw) {
-		HashMap<String, Object> up = new HashMap<String, Object>();
-		up.put("username", username);
-		up.put("userpw", userpw);
-		sqlSession.update("User.update", up);
+	public void update(String userid, String username, String userpw) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("userpw", userpw);
+		map.put("userid", userid);
+		System.out.println(map);
+		sqlSession.update("User.update", map);
 
 	}
 
@@ -78,6 +81,8 @@ public class UserDaoImpl implements UserDao {
 		int count = sqlSession.selectOne("User.check", map);
 		if (count == 1) {
 			result = true;
+		} else {
+			result = false;
 		}
 		return result;
 	}
