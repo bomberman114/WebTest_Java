@@ -43,9 +43,14 @@ if (adminToken != null) {
 	 <% if (adminToken.equals("1")) { %>
 	 <form action="/User/List" method="POST">
 	 	<input type="submit" value="회원목록">
+	 	<input type="hidden" value="<%=username %>" name="username">
+	    <input type="hidden" value="<%=adminToken %>" name="adminToken">
+	 <a href="/Menu/CreatForm">새로운 메뉴 만들기</a>
 	 </form>
 	 <% } %>
-	 
 <% } %>
+
+<a href="/Menu/Menu">게시판 메뉴가기</a>
+
 </body>
 </html>

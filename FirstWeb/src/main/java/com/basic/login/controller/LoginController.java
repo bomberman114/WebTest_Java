@@ -61,7 +61,7 @@ public class LoginController {
 		}
 
 		mv.addObject("loginUser", loginUser);
-		mv.setViewName("board/boardFirst");
+		mv.setViewName("board/first");
 
 		return mv;
 

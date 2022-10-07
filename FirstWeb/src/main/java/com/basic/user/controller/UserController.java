@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //어노테이션이 주입되었다.
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +23,6 @@ public class UserController {
 	@RequestMapping("/AccountForm") // ModelAndView 역할 MAV 컨트롤 스페이바 마브,
 	public ModelAndView userAccountForm() {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("유저회원가입 함수 도착");
-
 		mv.setViewName("user/accountForm");
 		return mv;
 	}
@@ -84,6 +81,7 @@ public class UserController {
 		UserVo detail = userService.detail(userid);
 		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 조회 후 UserVo에 입력");
 		System.out.println(detail);
+	
 
 		// 일반 유저임을 나타내기 위한 토큰 발급
 		detail.setAdminToken("0");
@@ -170,7 +168,7 @@ public class UserController {
 	public ModelAndView update(@RequestParam String userid, String username, String userpw) {
 		System.out.println("유저업데이트 입력 함수 도착");
 		ModelAndView mv = new ModelAndView();
-		userService.update(userid ,username, userpw);
+		userService.update(userid, username, userpw);
 		mv.setViewName("redirect:/User/List");
 		return mv;
 	}

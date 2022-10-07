@@ -1,14 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/common.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 <title>Insert title here</title>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	
+	var userpw = `${detail.userpw}`;
+	var pw = "";
+	
+	for(var i =0; i<userpw.length; i++){
+		pw += "*";
+	}
+	window.onload = function() {
+		var userpwEl = document.getElementById('userpw');
+		userpwEl.innerHTML= pw;
+		
+	} 
+var Count = 0;
+function btnGo() {
+	Count += 1;
+	var userpwEl = document.getElementById('userpw');
+	userpwEl.innerHTML = pw;
+	if(Count % 2 ==0){
+		userpwEl.innerHTML = pw;
+	
+	}else if (Count % 2 ==1 ){
+		userpwEl.innerHTML = userpw;
+		
+	}
+}
+
 	function deleteUser() {
 		if (confirm('탈퇴 하시겠습니까?')) {
 			alert('탈퇴 되었습니다.');
@@ -24,6 +52,10 @@
 			return false;
 		}
 	}
+	function password() {
+		
+	}
+	
 </script>
 </head>
 
@@ -44,7 +76,12 @@
 		</tr>
 		<tr>
 		<td><b>PW</b></td>
-		<td>${detail.userpw}</td>
+		<td>
+		<span id="userpw">
+			초기		
+		</span>
+		<button onclick="btnGo()">보기</button>
+		</td>
 		</tr>
 		<tr>
 		<td><b>생성일자</b></td>

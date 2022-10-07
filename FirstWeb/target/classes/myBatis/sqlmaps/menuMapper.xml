@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Menu">
+
+
+	<insert id="Menucreat">
+		INSERT INTO
+		BOARD_MENU(NAME,INDATE)
+		VALUES
+		(#{menuname},SYSDATE)
+
+
+	</insert>
+
+	<update id="Update">
+		UPDATE BOARD_MENU SET NAME = #{menuname},
+		MENUUPDATE LIKE SYSDATE WHERE NAME = #{menuname}
+
+	</update>
+
+	<select id="checkAccount" resultType="int">
+		SELECT COUNT(*) FROM
+		account_user WHERE USERID LIKE #{userid}
+
+	</select>
+
+
+</mapper>
+
