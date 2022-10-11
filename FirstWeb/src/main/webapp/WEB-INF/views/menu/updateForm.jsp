@@ -14,9 +14,10 @@
 </head>
 <body>
 	<h2>게시판 메뉴수정</h2>
-		<form action="/Menu/Update" method="Post"></form>
-		<span>새로운 메뉴이름:</span><input value="${update.menuname}" name="menuname" maxlength="10">
+		<form action="/Menu/Update" method="Post">
+		<span>새로운 메뉴이름:</span><input value="${menuname}" name="menuname" maxlength="10">
 		<input type="submit" value="메뉴이름수정">
+	</form>
 	<a href="board/first"></a>
 
 

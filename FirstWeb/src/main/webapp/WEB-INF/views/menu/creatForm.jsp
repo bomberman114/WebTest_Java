@@ -14,7 +14,7 @@
 </head>
 <body>
 <h3> 게시판메뉴만들기</h3>
-<form action="/Menu/Creat" id='Form' method="post">
+<form action="/Menu/Creat" id='Form' method="POST">
 	<span>메뉴이름</span><input type="text" placeholder="만들메뉴이름을 입력하세요!" id='menuname' maxlength="10" name="menuname">
 	<input type="hidden" value="${creatForm.username}" name="username">
 	<input type="hidden" value="${creatForm.adminToken}" name="adminToken">

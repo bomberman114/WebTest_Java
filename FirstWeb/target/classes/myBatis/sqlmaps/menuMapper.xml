@@ -8,7 +8,7 @@
 
 	<insert id="Menucreat">
 		INSERT INTO
-		BOARD_MENU(NAME,INDATE)
+		MENU(NAME,INDATE)
 		VALUES
 		(#{menuname},SYSDATE)
 
@@ -16,8 +16,8 @@
 	</insert>
 
 	<update id="Update">
-		UPDATE BOARD_MENU SET NAME = #{menuname},
-		MENUUPDATE LIKE SYSDATE WHERE NAME = #{menuname}
+		UPDATE MENU SET NAME LIKE #{menuname} AND
+		MENUUPDATE LIKE SYSDATE WHERE NAME LIKE #{menuname}
 
 	</update>
 
@@ -27,6 +27,22 @@
 
 	</select>
 
+
+	<select id="list" resultType="com.basic.menu.vo.MenuVo">
+		SELECT TO_CHAR(IDX) AS MENUIDX,
+        TO_CHAR(NAME) AS MENUNAME,
+        TO_CHAR(INDATE) AS MENUINDATE,
+        TO_CHAR(NVL(MENUUPDATE, '-')) AS USERUPDATE
+      FROM MENU ORDER BY IDX
+	</select>
+
+	<delete id="delete">
+		DELETE FROM MENU WHERE NAME LIKE #{menuname}
+	</delete>
+
+	<select id="uplist" resultType="com.basic.menu.vo.MenuVo">
+	SELECT TO_CHAR(NAME) AS MENUNAME FROM MENU WHERE NAME = #{menuname}
+	</select>
 
 </mapper>
 

@@ -19,8 +19,8 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		pw += "*";
 	}
 	window.onload = function() {
-		var userpwEl = document.getElementById('userpw');
-		userpwEl.innerHTML= pw;
+		var userpw = document.getElementById('userpw');
+		userpw.innerHTML= pw;
 		
 	} 
 var Count = 0;

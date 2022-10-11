@@ -1,10 +1,13 @@
 package com.basic.menu.daoimpl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.basic.menu.dao.MenuDao;
+import com.basic.menu.vo.MenuVo;
 
 @Repository("menuDao")
 public class MenuDaoImpl implements MenuDao {
@@ -19,22 +22,31 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public void update(String menuname) {
-		sqlSession.update("Menu.Update",menuname);
-		
+		sqlSession.update("Menu.Update", menuname);
+
 	}
 
 	@Override
-	public boolean idcheck(String userid) {
-		System.out.println(userid);
-		boolean result = false;
+	public List<MenuVo> list() {
+		System.out.println("메뉴목록 - Dao 바티스 전");
+		List<MenuVo> list = sqlSession.selectList("Menu.list");
+		System.out.println("다오임플:" + list);
+		System.out.println("메뉴목록 - Dao 바티스 후");
+		return list;
+	}
 
-		int count = sqlSession.selectOne("Menu.check", userid);
-		if (count == 1) {
-			// 있는개 확인이 되면 중복이기 때문에 일부러 false값을 준것이다.
-			result = false;
-		} else {
-			result = true;
-		}
-		return result;
+	@Override
+	public void delete(String menuname) {
+		System.out.println("메뉴삭제 - Dao 바티스 전");
+		sqlSession.delete("Menu.delete", menuname);
+		System.out.println("메뉴삭제 - Dao 바티스 후");
+	}
+
+	@Override
+	public MenuVo uplist(String menuname) {
+		System.out.println("다오임플 : " + menuname);
+		MenuVo uplist = sqlSession.selectOne("Menu.uplist", menuname);
+		System.out.println("다오임플후 : " + menuname);
+		return uplist;
 	}
 }

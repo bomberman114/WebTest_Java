@@ -7,6 +7,9 @@ public class MenuVo {
 	private String menuindate;
 	private String menuupdate;
 
+	public MenuVo() {
+	}
+
 	public MenuVo(String menuidx, String menuname, String menuindate, String menuupdate) {
 		super();
 		this.menuidx = menuidx;
