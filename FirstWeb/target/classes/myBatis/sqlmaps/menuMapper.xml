@@ -16,8 +16,8 @@
 	</insert>
 
 	<update id="Update">
-		UPDATE MENU SET NAME LIKE #{menuname} AND
-		MENUUPDATE LIKE SYSDATE WHERE NAME LIKE #{menuname}
+		UPDATE MENU SET NAME = #{newname} ,
+		MENUUPDATE = SYSDATE WHERE NAME LIKE #{menuname}
 
 	</update>
 
@@ -32,7 +32,7 @@
 		SELECT TO_CHAR(IDX) AS MENUIDX,
         TO_CHAR(NAME) AS MENUNAME,
         TO_CHAR(INDATE) AS MENUINDATE,
-        TO_CHAR(NVL(MENUUPDATE, '-')) AS USERUPDATE
+        TO_CHAR(NVL(MENUUPDATE, '-')) AS MENUUPDATE
       FROM MENU ORDER BY IDX
 	</select>
 

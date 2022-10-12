@@ -8,7 +8,7 @@ public interface MenuService {
 
 	void menucreat(String menuname);
 
-	void update(String menuname);
+	void update(String menuname, String newname);
 
 	// 메뉴목록
 	List<MenuVo> list();

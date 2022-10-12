@@ -23,6 +23,8 @@
 	<!-- html 추가 -->
 	<mvc:resources location="/WEB-INF/static/"
 		mapping="/static/**" />
+		<!-- 스마트 에디터 설정 -->
+	<mvc:resources mapping="/**" location="/webapp/" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

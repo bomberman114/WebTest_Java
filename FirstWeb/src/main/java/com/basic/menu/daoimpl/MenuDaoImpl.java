@@ -1,5 +1,6 @@
 package com.basic.menu.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,8 +22,11 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void update(String menuname) {
-		sqlSession.update("Menu.Update", menuname);
+	public void update(String menuname, String newname) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("menuname", menuname);
+		map.put("newname", newname);
+		sqlSession.update("Menu.Update", map);
 
 	}
 

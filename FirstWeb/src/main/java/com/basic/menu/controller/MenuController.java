@@ -42,17 +42,16 @@ public class MenuController {
 		MenuVo uplist = menuService.uplist(menuname);
 		System.out.println("컨트롤러후 : " + menuname);
 		System.out.println("업리스트 : " + uplist);
-		String menuname1 = uplist.getMenuname();
-		mv.addObject("menuname", menuname1);
+		mv.addObject("update", uplist);
 		mv.setViewName("menu/updateForm");
 		return mv;
 	}
 
 	@RequestMapping("Update")
-	public ModelAndView update(String menuname) {
+	public ModelAndView update(String menuname, String newname) {
 		ModelAndView mv = new ModelAndView();
-		menuService.update(menuname);
-		mv.setViewName("board/menu");
+		menuService.update(menuname, newname);
+		mv.setViewName("redirect:/Menu/List");
 
 		return mv;
 	}

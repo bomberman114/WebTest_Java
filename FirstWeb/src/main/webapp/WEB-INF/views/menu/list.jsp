@@ -45,6 +45,7 @@
 		</c:forEach>
 	</table>
 	<br>
+	<a href="/Write/WriteForm">글쓰기</a>
 	<a href="/Board/First">메인화면</a>
 </body>
 </html>

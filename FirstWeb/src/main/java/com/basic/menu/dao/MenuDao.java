@@ -8,7 +8,7 @@ public interface MenuDao {
 
 	void menucreat(String menuname);
 
-	void update(String menuname);
+	void update(String menuname, String newname);
 
 	List<MenuVo> list();
 

@@ -22,8 +22,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public void update(String menuname) {
-		menuDao.update(menuname);
+	public void update(String menuname, String newname) {
+		menuDao.update(menuname, newname);
 
 	}
 
