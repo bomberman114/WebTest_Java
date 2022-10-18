@@ -32,7 +32,7 @@ public class MenuServiceImpl implements MenuService {
 		System.out.println("메뉴목록 - Service 바티스 전");
 		List<MenuVo> list = menuDao.list();
 		System.out.println("메뉴목록 - Service 바티스 후");
-		System.out.println("서비스임플:"+list);
+		System.out.println("서비스임플:" + list);
 		return list;
 	}
 
@@ -44,11 +44,11 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public MenuVo uplist(String menuname) {
-		System.out.println("서비스임플 : "+menuname);
-		MenuVo uplist = menuDao.uplist(menuname);
+	public MenuVo menuInfo(String menuname) {
+		System.out.println("서비스임플 : " + menuname);
+		MenuVo menuInfo = menuDao.menuInfo(menuname);
 		System.out.println("서비스임플후 : " + menuname);
-		return uplist;
+		return menuInfo;
 	}
 
 }

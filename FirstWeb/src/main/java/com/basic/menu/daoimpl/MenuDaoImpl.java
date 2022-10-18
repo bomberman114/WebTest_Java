@@ -47,10 +47,10 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public MenuVo uplist(String menuname) {
+	public MenuVo menuInfo(String menuname) {
 		System.out.println("다오임플 : " + menuname);
-		MenuVo uplist = sqlSession.selectOne("Menu.uplist", menuname);
+		MenuVo menuInfo = sqlSession.selectOne("Menu.menuInfo", menuname);
 		System.out.println("다오임플후 : " + menuname);
-		return uplist;
+		return menuInfo;
 	}
 }

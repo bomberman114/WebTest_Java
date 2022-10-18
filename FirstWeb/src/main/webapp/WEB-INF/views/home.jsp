@@ -18,19 +18,13 @@
 
 	<h2>Home</h2>
 	
-		<a href="/Login/LoginForm">로그인</a>
-	<!--  <input type= "button" value="로그인"> -->
-		
-		
-		<!-- %자바로 코드로 위를 구현% -->
+	<a href="/Login/LoginForm">로그인</a>
+	<br>
+	<br>
+	<form action="/Board/List" method="POST">
+		<input type="hidden" value="" name="userid">
+		<input type="submit" value="게시판 바로가기">
+	</form>
 	
-
-	<!-- <a href="User/UserList?username=조현길&age=26&gender=남자">회원가입 목록</a>  -->
-
-	
-	<%-- JSTL 
-<%String name = "조현길"; %>
-<%=name %>
- --%>
 </body>
 </html>

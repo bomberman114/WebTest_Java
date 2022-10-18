@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 
 public interface BoardDao {
@@ -15,13 +17,11 @@ public interface BoardDao {
 	List<MenuVo> menuList();
 
 	// 게시글 조회
-	List<BoardVo> boardList();
+	List<BoardVo> boardList(String menuname, PageVo pagination, String searchText, String searchType);
+	
+	//총 게시글 개수 확인
+	int listCnt(String menuname, String searchType, String searchText);
 
-	// 메뉴별 게시글 조회
-	List<BoardVo> selectMenu(String menuname);
-
-	// 검색한 게시글 조회
-	List<BoardVo> search(String searchType, String searchText);
 
 	// 게시글 상세 페이지
 	BoardVo detail(String boardidx);
@@ -37,5 +37,7 @@ public interface BoardDao {
 
 	// 게시글 작성
 	void write(HashMap<String, Object> map);
+
+	List<ReplyVo> reply(String boardidx);
 
 }

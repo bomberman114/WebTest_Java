@@ -10,9 +10,10 @@ public interface MenuDao {
 
 	void update(String menuname, String newname);
 
+	MenuVo menuInfo(String menuname);
+
 	List<MenuVo> list();
 
 	void delete(String menuname);
 
-	MenuVo uplist(String menuname);
 }

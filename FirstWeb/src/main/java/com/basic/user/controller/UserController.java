@@ -72,16 +72,13 @@ public class UserController {
 	}
 
 	@RequestMapping("/Detail")
-	public ModelAndView detailUser(@RequestParam String userid) {
+	public ModelAndView detailUser(String userid) {
 		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 함수 도착");
 		System.out.println("detail userid = " + userid);
 		ModelAndView mv = new ModelAndView();
 
 		// DB에서 정보를 가져온다.
 		UserVo detail = userService.detail(userid);
-		System.out.println("유저 컨트롤러 - 일반 유저기준 상세정보 조회 후 UserVo에 입력");
-		System.out.println(detail);
-	
 
 		// 일반 유저임을 나타내기 위한 토큰 발급
 		detail.setAdminToken("0");
@@ -114,14 +111,6 @@ public class UserController {
 		mv.addObject("detail", detail);
 		mv.setViewName("user/detail");
 		System.out.println("유저 컨트롤러 - 관리자 기준 상세정보 화면 전달");
-		return mv;
-	}
-
-	@RequestMapping("/Test")
-	public ModelAndView test(@RequestParam HashMap<String, Object> map) {
-		System.out.println("Test에 왔습니다..");
-		System.out.println("test map =" + map);
-		ModelAndView mv = new ModelAndView();
 		return mv;
 	}
 
@@ -169,7 +158,8 @@ public class UserController {
 		System.out.println("유저업데이트 입력 함수 도착");
 		ModelAndView mv = new ModelAndView();
 		userService.update(userid, username, userpw);
-		mv.setViewName("redirect:/User/List");
+		mv.addObject("userid", userid);
+		mv.setViewName("redirect:/User/Detail");
 		return mv;
 	}
 

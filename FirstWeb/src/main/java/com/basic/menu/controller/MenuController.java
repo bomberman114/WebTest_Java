@@ -28,7 +28,6 @@ public class MenuController {
 	@RequestMapping("Creat")
 	public ModelAndView menu(@RequestParam String menuname) {
 		ModelAndView mv = new ModelAndView();
-		// boolean result = menuService.idcheck(userid);
 		System.out.println("메뉴이름 : " + menuname);
 		menuService.menucreat(menuname);
 		mv.setViewName("/menu/list");
@@ -37,16 +36,16 @@ public class MenuController {
 
 	@RequestMapping("UpdateForm")
 	public ModelAndView updateForm(@RequestParam String menuname) {
+		System.out.println("메뉴 컨트롤러 - 메뉴 수정 함수 도착");
 		ModelAndView mv = new ModelAndView();
-		System.out.println("컨트롤러 : " + menuname);
-		MenuVo uplist = menuService.uplist(menuname);
-		System.out.println("컨트롤러후 : " + menuname);
-		System.out.println("업리스트 : " + uplist);
-		mv.addObject("update", uplist);
+		
+		// 기존의 메뉴 이름을 보여주기 위한 메뉴 정보조회
+		MenuVo updateMenu = menuService.menuInfo(menuname);
+		mv.addObject("update", updateMenu);
 		mv.setViewName("menu/updateForm");
+		
 		return mv;
 	}
-
 	@RequestMapping("Update")
 	public ModelAndView update(String menuname, String newname) {
 		ModelAndView mv = new ModelAndView();

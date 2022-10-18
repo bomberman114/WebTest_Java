@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 import com.basic.board.dao.BoardDao;
 
@@ -19,38 +21,43 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public UserVo userInfo(String userid) {
-		UserVo loginUser = sqlSession.selectOne("Board.userInfo", userid);
+		UserVo loginUser = sqlSession.selectOne("User.detail", userid);
 		return loginUser;
 	}
 
 	@Override
 	public List<MenuVo> menuList() {
-		List<MenuVo> menuList = sqlSession.selectList("Board.menuList");
+		List<MenuVo> menuList = sqlSession.selectList("Menu.list");
 		return menuList;
 	}
 
 	@Override
-	public List<BoardVo> boardList() {
-		List<BoardVo> boardList = sqlSession.selectList("Board.boardList");
+	public List<BoardVo> boardList(String menuname, PageVo pagination, String searchType, String searchText) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startlist = pagination.getStartList();
+		int endList = pagination.getEndList();
+		System.out.println(startlist);
+		map.put("menuname", menuname);
+		map.put("startList", startlist);
+		map.put("endList", endList);
+		map.put("searchType", searchType);
+		map.put("searchText", searchText);
+		List<BoardVo> boardList = sqlSession.selectList("Board.list", map);
 		return boardList;
 	}
 
+	// 총 게시글 개수 확인
 	@Override
-	public List<BoardVo> selectMenu(String menuname) {
-		List<BoardVo> selectList = sqlSession.selectList("Board.selectMenu", menuname);
-		return selectList;
-	}
-
-	@Override
-	public List<BoardVo> search(String searchType, String searchText) {
-
-		HashMap<String, Object> map = new HashMap<>();
+	public int listCnt(String menuname, String searchType, String searchText) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("menuname", menuname);
 		map.put("searchType", searchType);
 		map.put("searchText", searchText);
+		int listCnt = sqlSession.selectOne("Board.listCnt", map);
 
-		List<BoardVo> searchList = sqlSession.selectList("Board.search", map);
-		return searchList;
+		return listCnt;
 	}
+
 
 	@Override
 	public BoardVo detail(String boardidx) {
@@ -81,6 +88,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void write(HashMap<String, Object> map) {
 		sqlSession.insert("Board.write", map);
+	}
+
+	@Override
+	public List<ReplyVo> reply(String boardidx) {
+		List<ReplyVo> reply = sqlSession.selectList("Reply.list", boardidx); 
+		return reply;
 	}
 
 }

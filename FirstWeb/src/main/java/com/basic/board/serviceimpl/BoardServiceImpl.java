@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.basic.board.service.BoardService;
 import com.basic.board.vo.BoardVo;
 import com.basic.menu.vo.MenuVo;
+import com.basic.page.vo.PageVo;
+import com.basic.reply.vo.ReplyVo;
 import com.basic.user.vo.UserVo;
 import com.basic.board.dao.BoardDao;
 
@@ -29,21 +31,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVo> boardList() {
-		List<BoardVo> boardList = boardDao.boardList();
+	public List<BoardVo> boardList(String menuname, PageVo pagination, String searchType, String searchText) {
+		List<BoardVo> boardList = boardDao.boardList(menuname, pagination, searchText, searchType);
 		return boardList;
 	}
 
+	// 총 게시글 개수 확인
 	@Override
-	public List<BoardVo> selectMenu(String menuname) {
-		List<BoardVo> selectList = boardDao.selectMenu(menuname);
-		return selectList;
-	}
-
-	@Override
-	public List<BoardVo> search(String searchType, String searchText) {
-		List<BoardVo> searchList = boardDao.search(searchType, searchText);
-		return searchList;
+	public int listCnt(String menuname, String searchType, String searchText) {
+		int listCnt = boardDao.listCnt(menuname, searchType, searchText);
+		return listCnt;
 	}
 
 	@Override
@@ -70,6 +67,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void write(HashMap<String, Object> map) {
 		boardDao.write(map);
+	}
+
+	@Override
+	public List<ReplyVo> reply(String boardidx) {
+		List<ReplyVo> reply = boardDao.reply(boardidx);
+		return reply;
 	}
 
 }

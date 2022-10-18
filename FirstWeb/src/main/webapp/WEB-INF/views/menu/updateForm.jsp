@@ -13,15 +13,15 @@
 </script>
 </head>
 <body>
-	<h2>게시판 메뉴수정</h2>
-		<form action="/Menu/Update" method="Post">
+	<h3>게시판 메뉴 수정</h3>
+	
+	<form action="/Menu/Update" method="Post">
 		<span>메뉴 이름</span> <input value="${update.menuname}" placeholder="새로운 이름 입력" maxlength="10" name="newname">
 		<br>
 		<br>
 		<input type="hidden" value="${update.menuname}" name="menuname">
 		<input type="submit" value="수정">
 	</form>
-	<a href="board/first"></a>
 
 
 

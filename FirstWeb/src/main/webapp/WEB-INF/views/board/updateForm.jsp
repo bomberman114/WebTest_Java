@@ -5,12 +5,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 클래식 에디터 -->
 <title>Insert title here</title>
 <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 <link rel="stylesheet" href="/css/common.css" />
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
 </script>
+<script>
+ window.onload = function() {
+        ClassicEditor
+            .create( document.querySelector( '#classic' ))
+            .catch( error => {
+                console.error( error );
+            } );}
+    </script>
+
+
+	<!-- 넓이 높이 조절 -->
+	<style>
+	.ck.ck-editor {
+    	max-width: 1000px;
+	}
+	.ck-editor__editable {
+	    min-height: 500px;
+	}
+	</style>
 </head>
 <body>
 	<h2>게시글 수정</h2>
@@ -30,7 +50,7 @@
 		</select>
 		<br>
 		<span>내용</span> <br>
-		<textarea cols="100" rows="30" name="boardcontent">${update.boardcontent}</textarea>
+		<textarea cols="100" rows="30" name="boardcontent" id="classic">${update.boardcontent}</textarea>
 		<br>
 		<br>
 		<input type="hidden" value="${user.userid}" name="userid">

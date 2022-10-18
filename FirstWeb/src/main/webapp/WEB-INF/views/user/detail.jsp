@@ -111,6 +111,6 @@ function btnGo() {
 			</form>
 		</c:if>
 	<br>
-	<a href="/">메인화면</a>
+	<a href="/Board/First?userid=${detail.userid}">메인화면</a>
 </body>
 </html>

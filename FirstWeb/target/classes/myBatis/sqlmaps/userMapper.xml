@@ -7,12 +7,10 @@
 
 	<insert id="accountUser">
 
-
 		INSERT INTO
 		ACCOUNT_USER(USERID,USERPW,USERNAME,USERINDATE)
 		VALUES
 		(#{userid},#{userpwd},#{username},SYSDATE)
-
 
 	</insert>
 	<select id="List" resultType="com.basic.user.vo.UserVo">
