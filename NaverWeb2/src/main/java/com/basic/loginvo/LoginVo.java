@@ -89,25 +89,7 @@ public class LoginVo {
 		return response.getBody();
 	}
 
-	public static String getClientId() {
-		return CLIENT_ID;
-	}
 
-	public static String getClientSecret() {
-		return CLIENT_SECRET;
-	}
-
-	public static String getRedirectUri() {
-		return REDIRECT_URI;
-	}
-
-	public static String getSessionState() {
-		return SESSION_STATE;
-	}
-
-	public static String getProfileApiUrl() {
-		return PROFILE_API_URL;
-	}
 
 	
 	

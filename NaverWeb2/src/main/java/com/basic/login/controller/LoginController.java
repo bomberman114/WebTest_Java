@@ -79,9 +79,15 @@ public class LoginController {
 
 		// 4.파싱 닉네임 세션으로 저장
 		session.setAttribute("sessionId", nickname); // 세션 생성
+		  // 세션 유지시간 설정(초단위)
+	    // 60 * 30 = 30분
+		//앞의 숫자가 초단위이다.
+	    session.setMaxInactiveInterval(60*30); 	
+		
 
+		System.out.println("callback정보:"+apiResult);
 		mv.addObject("result", apiResult);
-		mv.setViewName("/login/main");
+		mv.setViewName("/login/login");
 		return mv;
 	}
 
