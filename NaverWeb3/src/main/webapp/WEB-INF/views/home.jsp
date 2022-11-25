@@ -14,6 +14,5 @@
 <body>
 <h2>HOME2</h2>
 <a href="/Naver/Search">책검색</a>
-<a href="/Login/login">로그인</a>
 </body>
 </html>

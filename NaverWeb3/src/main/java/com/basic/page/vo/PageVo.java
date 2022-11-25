@@ -2,7 +2,7 @@ package com.basic.page.vo;
 
 public class PageVo {
 
-	private int listSize ; // 한 페이지당 보여질 게시글의 수 /내가 요청한 갯수
+	private int listSize; // 한 페이지당 보여질 게시글의 수 /내가 요청한 갯수
 	private int rangeSize = 10; // 한 범위에 보여질 페이지의 개수
 	private int page; // 현재 페이지 번호
 	private int range; // 각 페이지 범위의 갯수(1-10 1개, 11-20개 1개....)
@@ -145,8 +145,14 @@ public class PageVo {
 		this.listCnt = listCnt;
 
 		// 전체 페이지수 
-		double pagCount = (double) listCnt / listSize;
-		this.pageCnt = (int) Math.ceil(pagCount);
+		if (listCnt <= 1000) { // 네이버api가 1000개만 정보를 주기때문에 설정을 해야한다.
+			double pagCount = (double) listCnt / listSize;
+			this.pageCnt = (int) Math.ceil(pagCount);
+		} else if (listCnt > 1000) {
+			listCnt = 1000;
+			double pagCount = (double) listCnt / listSize;
+			this.pageCnt = (int) Math.ceil(pagCount);
+		}
 		// 시작 페이지
 		this.startPage = (range - 1) * rangeSize + 1;
 		// 끝 페이지
