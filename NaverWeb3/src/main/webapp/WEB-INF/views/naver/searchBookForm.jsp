@@ -26,10 +26,10 @@
 		alert("value = "+value);
 	
 		
-		/* 		
+				
 		var selectedindex = city.selectedIndex;
 		alert("value = "+value+" , selectedindex = "+selectedindex); 
-		*/
+		
 	     };
 	*/
 

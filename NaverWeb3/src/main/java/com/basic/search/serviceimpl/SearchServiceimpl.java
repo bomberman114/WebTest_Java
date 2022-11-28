@@ -35,7 +35,6 @@ public class SearchServiceimpl
 
 		List<SearchVo> search = new ArrayList<SearchVo>();
 		System.out.println("서비스 display:" + display + ", start:" + start);
-
 		String apiURL = ("https://openapi.naver.com/v1/search/" + "book.json?query="
 				+ URLEncoder.encode(keyword, "UTF-8") + (display != 0 ? "&display=" + display : "")
 				+ (start != 0 ? "&start=" + start : ""));
@@ -44,7 +43,7 @@ public class SearchServiceimpl
 		requestHeaders.put("X-Naver-Client-Id", clientID);
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 		String responseBody = get(apiURL, requestHeaders);
-		// System.out.println("47번줄 :" + apiURL);
+		System.out.println("47번줄 :" + apiURL);
 
 		JSONParser parser = new JSONParser();
 		// JSON데이터를 넣어 JSON Object 로 만들어 준다.
@@ -52,6 +51,7 @@ public class SearchServiceimpl
 		JSONObject jsonObj = (JSONObject) obj;
 		// json Object로 파싱한뒤에 jsonArraylist 형태로 다시 파싱한뒤에 안에서 필요한 정보를 꺼낸다.
 		JSONArray bookInfoArray = (JSONArray) jsonObj.get("items");
+		System.out.println("54번줄 :" + obj);
 
 		for (int i = 0; i < bookInfoArray.size(); i++) {
 			// 계속해서 Vo 새롭게 할당해줘야한다 그렇지 않으면 계속해서 들어오는 정보가 이미있는 정보를 덮어 버린다.
